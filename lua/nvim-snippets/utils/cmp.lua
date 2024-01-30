@@ -21,6 +21,10 @@ function source:get_debug_name()
 	return "snippets"
 end
 
+function source:get_keyword_pattern()
+    return "."
+end
+
 function source:complete(_, callback)
 	if cache[vim.bo.filetype] == nil then
 		cache[vim.bo.filetype] = Snippets.load_snippets_for_ft(vim.bo.filetype)
