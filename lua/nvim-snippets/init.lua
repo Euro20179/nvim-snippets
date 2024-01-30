@@ -51,12 +51,13 @@ function snippets.get_loaded_snippets()
 end
 
 ---@param filetype string
+---@param name string
 ---@param snippet table<string, Snippet>
 ---@return boolean
 ---Returns true if it successfuly added the snippet, otherwise false
-function snippets.add_snippet(filetype, snippet)
+function snippets.add_snippet(filetype, name, snippet)
     local runtime_ft_snippets = snippets.runtime_snippets[filetype] or {}
-    local e, result = pcall(vim.tbl_deep_extend, "error", runtime_ft_snippets, snippet)
+    local e, result = pcall(vim.tbl_deep_extend, "error", runtime_ft_snippets, { [name] = snippet })
     if not e then
         return e
     end
