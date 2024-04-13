@@ -10,7 +10,7 @@ Snippets = snippets
 ---@field body string
 
 ---@private
----@type table<string, Snippet>
+---@type table<string, table<string, Snippet>>
 snippets.loaded_snippets = {}
 
 ---@private
@@ -30,17 +30,25 @@ function snippets.load_snippets_for_ft(filetype)
 	local global_snippets = snippets.utils.get_global_snippets()
 	local extended_snippets = snippets.utils.get_extended_snippets(filetype)
 	local ft_snippets = snippets.utils.get_snippets_for_ft(filetype)
-	snippets.loaded_snippets = vim.tbl_deep_extend("force", {}, global_snippets, extended_snippets, ft_snippets)
+	snippets.loaded_snippets[filetype] = vim.tbl_deep_extend("force", {}, global_snippets, extended_snippets, ft_snippets)
 
 	for key, snippet in pairs(snippets.loaded_snippets) do
 		snippets.prefix_lookup[snippet.prefix] = key
 	end
-	return snippets.loaded_snippets
+	return snippets.loaded_snippets[filetype]
 end
 
+---@param filetype string
+---@param name string
+---@param snip Snippet
+function snippets.add_snippet(filetype, name, snip)
+    snippets.loaded_snippets[filetype] = vim.tbl_extend("keep", snippets.loaded_snippets[filetype] or {}, {[name] = snip})
+end
+
+---@param filetype string
 ---@return table<string, Snippet>
-function snippets.get_loaded_snippets()
-	return snippets.loaded_snippets
+function snippets.get_snippets(filetype)
+    return snippets.loaded_snippets[filetype] or {}
 end
 
 ---@param opts? table  -- Make a better type for this

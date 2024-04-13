@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local snippets = require"nvim-snippets"
 
 local source = {}
 
@@ -34,7 +35,7 @@ function source:complete(_, callback)
 		cache[vim.bo.filetype] = Snippets.load_snippets_for_ft(vim.bo.filetype)
 	end
 
-	local loaded_snippets = cache[vim.bo.filetype]
+	local loaded_snippets = snippets.get_snippets(vim.bo.filetype)
 
 	local response = {}
 
