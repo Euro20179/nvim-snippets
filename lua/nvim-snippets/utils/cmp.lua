@@ -22,7 +22,7 @@ function source:get_debug_name()
 end
 
 function source:get_keyword_pattern()
-    return [[.\+]]
+    return "[[:keyword:]#!]\\+"
 end
 
 function source:get_trigger_characters()
