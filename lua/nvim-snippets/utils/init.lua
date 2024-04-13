@@ -173,7 +173,7 @@ function utils.create_autocmd()
 end
 
 function utils.register_cmp_source()
-    require("snippets.utils.cmp").register()
+    require("nvim-snippets.utils.cmp").register()
 end
 
 function utils.load_friendly_snippets()
