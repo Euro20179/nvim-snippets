@@ -17,10 +17,6 @@ snippets.loaded_snippets = {}
 ---@type table<string, string|string[]>
 snippets.registry = {}
 
----@private
----@type table<string, string>
-snippets.prefix_lookup = {}
-
 ---@type fun(filetype?: string): table<string, table>|nil
 function snippets.load_snippets_for_ft(filetype)
 	if snippets.utils.is_filetype_ignored(filetype) then
@@ -32,9 +28,6 @@ function snippets.load_snippets_for_ft(filetype)
 	local ft_snippets = snippets.utils.get_snippets_for_ft(filetype)
 	snippets.loaded_snippets[filetype] = vim.tbl_deep_extend("force", {}, global_snippets, extended_snippets, ft_snippets)
 
-	for key, snippet in pairs(snippets.loaded_snippets) do
-		snippets.prefix_lookup[snippet.prefix] = key
-	end
 	return snippets.loaded_snippets[filetype]
 end
 

@@ -148,16 +148,6 @@ function utils.get_global_snippets(loaded)
 	return loaded
 end
 
----@type fun(prefix: string): table<string, table>|nil
-function utils.find_snippet_prefix(prefix)
-	if not prefix then
-		return nil
-	end
-
-	local key = Snippets.prefix_lookup[prefix]
-	return Snippets.loaded_snippets[key]
-end
-
 function utils.create_autocmd()
 	if not Snippets.config.get_option("create_autocmd") then
 		return
