@@ -1,3 +1,11 @@
+# This fork
+
+The goals of this fork are to expend the functionality of the original project
+
+Mostly just be adding way to set snippets during runtime
+
+And maybe some other stuff
+
 # nvim-snippets
 
 Allow vscode style snippets to be used with native neovim snippets `vim.snippet`. Also comes with support for [friendly-snippets](https://github.com/rafamadriz/friendly-snippets).
